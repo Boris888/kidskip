@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KidSkip — YouTube Parental Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blue: #1A6FFF;
+    --blue-dark: #0050CC;
+    --blue-light: #E8F0FF;
+    --green: #00C896;
+    --text: #0D1B2A;
+    --muted: #5A6A7E;
+    --white: #FFFFFF;
+    --shadow: 0 8px 32px rgba(26,111,255,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Sora', sans-serif;
+    background: #F7FAFF;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 1.4rem; color: var(--blue);
+  }
+  .nav-logo svg { width: 36px; height: 36px; }
+  .nav-cta {
+    background: var(--blue);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 60px;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-text { flex: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 0.8rem; font-weight: 700;
+    padding: 6px 14px; border-radius: 50px;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--blue); }
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(26,111,255,0.35);
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+  .btn-secondary {
+    background: white;
+    color: var(--blue);
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid var(--blue);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--blue-light); }
+
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-image img {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+  .hero-placeholder {
+    width: 480px; height: 320px;
+    background: linear-gradient(135deg, var(--blue-light) 0%, #d0e4ff 100%);
+    border-radius: 20px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px dashed #b0c8ff;
+  }
+
+  /* SOCIAL PROOF */
+  .social-proof {
+    background: white;
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 40px;
+    border-top: 1px solid #EEF2FF;
+    border-bottom: 1px solid #EEF2FF;
+  }
+  .proof-item { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem; }
+  .proof-item strong { color: var(--text); }
+
+  /* FEATURES */
+  .features {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 60px;
+  }
+  .section-label {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 56px;
+    color: var(--text);
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .feature-icon {
+    width: 52px; height: 52px;
+    background: var(--blue-light);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+  .feature-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .feature-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+
+  /* HOW IT WORKS */
+  .how {
+    background: linear-gradient(135deg, #0D1B2A 0%, #1A3A6B 100%);
+    padding: 80px 60px;
+    color: white;
+  }
+  .how-inner { max-width: 1000px; margin: 0 auto; }
+  .how .section-label { color: #7EB8FF; }
+  .how .section-title { color: white; }
+  .steps { display: flex; gap: 0; align-items: flex-start; justify-content: center; }
+  .step { flex: 1; text-align: center; padding: 0 20px; position: relative; }
+  .step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px; top: 20px;
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .step-num {
+    width: 48px; height: 48px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 1.2rem;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 16px rgba(26,111,255,0.5);
+  }
+  .step h4 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .step p { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  /* SCREENSHOT */
+  .screenshot-section {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 0 60px;
+    text-align: center;
+  }
+  .screenshot-section img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 16px 60px rgba(26,111,255,0.18);
+    border: 1px solid #e0ecff;
+  }
+  .screenshot-placeholder {
+    width: 100%; height: 420px;
+    background: linear-gradient(135deg, #eaf2ff 0%, #d4e8ff 100%);
+    border-radius: 16px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    border: 2px dashed #b0c8ff;
+  }
+
+  /* PRICING */
+  .pricing {
+    max-width: 700px;
+    margin: 0 auto 80px;
+    padding: 0 60px;
+  }
+  .pricing-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(26,111,255,0.15);
+    border: 2px solid var(--blue);
+  }
+  .pricing-header {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    padding: 36px 40px;
+    color: white;
+    text-align: center;
+  }
+  .pricing-header h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 1.3rem;
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+  .price {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 3.5rem;
+    line-height: 1;
+  }
+  .price span { font-size: 1.2rem; font-weight: 600; opacity: 0.8; }
+  .price-note { font-size: 0.9rem; opacity: 0.75; margin-top: 6px; }
+  .pricing-body { padding: 36px 40px; }
+  .pricing-features { list-style: none; margin-bottom: 32px; }
+  .pricing-features li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f4ff;
+    font-size: 0.95rem;
+  }
+  .pricing-features li:last-child { border-bottom: none; }
+  .check { color: var(--green); font-size: 1.1rem; }
+  .free-tier {
+    background: #f7faff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .free-tier strong { color: var(--text); }
+  .btn-purchase {
+    display: block;
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    padding: 16px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(26,111,255,0.35);
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+  }
+  .btn-purchase:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #0D1B2A;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 60px;
+    font-size: 0.85rem;
+  }
+  footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer a:hover { color: white; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { flex-direction: column; padding: 48px 24px; }
+    .hero h1 { font-size: 2rem; }
+    .hero-placeholder { width: 100%; }
+    .features { padding: 0 24px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .how { padding: 60px 24px; }
+    .steps { flex-direction: column; gap: 32px; }
+    .step:not(:last-child)::after { display: none; }
+    .pricing { padding: 0 24px; }
+    .social-proof { flex-wrap: wrap; padding: 20px 24px; gap: 20px; }
+    .screenshot-section { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://i.imgur.com/jGN0LiY.png" alt="KidSkip icon" style="width:36px;height:36px;border-radius:8px;"/>
+    KidSkip
+  </div>
+  <a href="#" class="nav-cta">Add to Chrome — Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">
+      🛡️ Chrome Extension
+    </div>
+    <h1>Keep your kids <span>safe</span> on YouTube</h1>
+    <p>KidSkip gives parents simple, PIN-protected control over YouTube. Free to use — pay once only to unlock videos beyond your safe list.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">
+        🛡️ Add to Chrome — It's Free
+      </a>
+      <a href="#features" class="btn-secondary">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://i.imgur.com/bem3BPU.png" alt="KidSkip main menu"/>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<div class="social-proof">
+  <div class="proof-item">✅ <strong>Free to install</strong> — no credit card</div>
+  <div class="proof-item">🔒 <strong>SHA-256</strong> PIN protection</div>
+  <div class="proof-item">👨‍👩‍👧 <strong>Trusted</strong> by parents</div>
+  <div class="proof-item">💳 <strong>€10 once</strong> — only if you need more</div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <p class="section-label">Features</p>
+  <h2 class="section-title">Everything a parent needs</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <h3>PIN Protection</h3>
+      <p>Secure your settings with a parent PIN. Kids can't bypass it — protected by SHA-256 encryption.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚫</div>
+      <h3>YouTube Blocking</h3>
+      <p>Block access to YouTube entirely or filter specific videos and channels instantly.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>One Click Control</h3>
+      <p>Enable or disable protection in seconds. Simple interface designed for busy parents.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>Always On Guard</h3>
+      <p>Works in the background. No need to remember to activate it — KidSkip watches so you don't have to.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <h3>Works Everywhere</h3>
+      <p>Compatible with all Chrome browsers on Windows, Mac, and Chromebook.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💳</div>
+      <h3>Free — Then Pay Once</h3>
+      <p>Use KidSkip for free. Pay €10 once only to unlock videos beyond your approved safe list. No subscription, ever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Up and running in 2 minutes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Install the extension</h4>
+        <p>Add KidSkip to Chrome from the Web Store in one click.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Set your PIN</h4>
+        <p>Create a secure parent PIN that only you know.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Activate protection</h4>
+        <p>Turn on blocking for YouTube — your settings are locked.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Kids browse safely</h4>
+        <p>YouTube is controlled. You stay in charge, always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="screenshot-section">
+  <p class="section-label" style="margin-top:0">Demo</p>
+  <h2 class="section-title">See KidSkip in action</h2>
+  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 16px 60px rgba(26,111,255,0.18);">
+    <iframe
+      src="https://www.youtube.com/embed/h_lNycziCpw"
+      title="KidSkip Demo"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;">
+    </iframe>
+  </div>
+</section>
+
+<!-- SCREENSHOT -->
+<section class="screenshot-section">
+  <p class="section-label" style="margin-top:0">In action</p>
+  <h2 class="section-title">Simple. Clean. Effective.</h2>
+  <!-- Replace this div with: <img src="YOUR_IMGUR_URL" alt="KidSkip dashboard"/> -->
+  <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+    <img src="https://i.imgur.com/wgrEnHG.png" alt="KidSkip PIN protection" style="width:48%;max-width:380px;border-radius:16px;box-shadow:0 16px 60px rgba(26,111,255,0.18);border:1px solid #e0ecff;"/>
+    <img src="https://i.imgur.com/alypuI9.png" alt="KidSkip safe list" style="width:48%;max-width:380px;border-radius:16px;box-shadow:0 16px 60px rgba(26,111,255,0.18);border:1px solid #e0ecff;"/>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">Free to start. €10 to unlock everything.</h2>
+  <div class="pricing-card">
+    <div class="pricing-header">
+      <h3>Unlock Premium — One Time</h3>
+      <div class="price"><span>€</span>10</div>
+      <div class="price-note">One-time payment · Lifetime access · No subscription</div>
+    </div>
+    <div class="pricing-body">
+      <div class="free-tier">
+        🆓 <strong>Always free:</strong> install KidSkip, set your PIN, and protect YouTube with your safe list — no payment needed.
+        <br/><br/>
+        💡 <strong>The €10 unlocks:</strong> allowing videos <em>beyond</em> your safe list, with full parental control over what gets through.
+      </div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Full YouTube blocking & filtering</li>
+        <li><span class="check">✓</span> Unlimited safe list management</li>
+        <li><span class="check">✓</span> Allow videos beyond the safe list</li>
+        <li><span class="check">✓</span> SHA-256 secured parent PIN</li>
+        <li><span class="check">✓</span> Works on all Chrome devices</li>
+        <li><span class="check">✓</span> All future updates included</li>
+      </ul>
+      <a href="#" class="btn-purchase">Unlock for €10 — Pay Once, Keep Forever</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:10px">
+    <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="mailto:boris.huruguen@gmail.com">Contact</a> &nbsp;·&nbsp;
+    <a href="#">Add to Chrome</a>
+  </p>
+  <p>© 2026 KidSkip · Made with ❤️ for parents everywhere</p>
+</footer>
+
+</body>
+</html>
