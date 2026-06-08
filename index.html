@@ -39,7 +39,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 900; font-size: 1.4rem; color: var(--blue);
   }
-  .nav-logo svg { width: 36px; height: 36px; }
+  .nav-logo img { width: 36px; height: 36px; border-radius: 8px; }
   .nav-cta {
     background: var(--blue);
     color: white;
@@ -124,21 +124,9 @@
   }
   .hero-image img {
     width: 100%;
-    max-width: 480px;
+    max-width: 380px;
     border-radius: 20px;
-    box-shadow: var(--shadow);
-  }
-  .hero-placeholder {
-    width: 480px; height: 320px;
-    background: linear-gradient(135deg, var(--blue-light) 0%, #d0e4ff 100%);
-    border-radius: 20px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 12px;
-    color: var(--blue);
-    font-weight: 700;
-    font-size: 1rem;
-    border: 2px dashed #b0c8ff;
+    filter: drop-shadow(0 12px 40px rgba(26,111,255,0.22));
   }
 
   /* SOCIAL PROOF */
@@ -236,7 +224,7 @@
   .step h4 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
   .step p { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
 
-  /* SCREENSHOT */
+  /* VIDEO / DEMO */
   .screenshot-section {
     max-width: 900px;
     margin: 80px auto;
@@ -248,17 +236,6 @@
     border-radius: 16px;
     box-shadow: 0 16px 60px rgba(26,111,255,0.18);
     border: 1px solid #e0ecff;
-  }
-  .screenshot-placeholder {
-    width: 100%; height: 420px;
-    background: linear-gradient(135deg, #eaf2ff 0%, #d4e8ff 100%);
-    border-radius: 16px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 12px;
-    color: var(--blue);
-    font-weight: 700;
-    border: 2px dashed #b0c8ff;
   }
 
   /* PRICING */
@@ -344,7 +321,6 @@
     nav { padding: 16px 24px; }
     .hero { flex-direction: column; padding: 48px 24px; }
     .hero h1 { font-size: 2rem; }
-    .hero-placeholder { width: 100%; }
     .features { padding: 0 24px; }
     .features-grid { grid-template-columns: 1fr; }
     .how { padding: 60px 24px; }
@@ -361,10 +337,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="https://i.imgur.com/jGN0LiY.png" alt="KidSkip icon" style="width:36px;height:36px;border-radius:8px;"/>
+    <img src="logo.png" alt="KidSkip icon"/>
     KidSkip
   </div>
-  <a href="#" class="nav-cta">Add to Chrome — Free</a>
+  <a href="https://chromewebstore.google.com/detail/kidskip/pogeigmejeccdgfnddgpfijaielmadin" class="nav-cta">Add to Chrome — Free</a>
 </nav>
 
 <!-- HERO -->
@@ -376,14 +352,14 @@
     <h1>Keep your kids <span>safe</span> on YouTube</h1>
     <p>KidSkip gives parents simple, PIN-protected control over YouTube. Free to use — pay once only to unlock videos beyond your safe list.</p>
     <div class="hero-buttons">
-      <a href="#" class="btn-primary">
+      <a href="https://chromewebstore.google.com/detail/kidskip/pogeigmejeccdgfnddgpfijaielmadin" class="btn-primary">
         🛡️ Add to Chrome — It's Free
       </a>
-      <a href="#features" class="btn-secondary">See how it works</a>
+      <a href="#demo" class="btn-secondary">See how it works</a>
     </div>
   </div>
   <div class="hero-image">
-    <img src="https://i.imgur.com/bem3BPU.png" alt="KidSkip main menu"/>
+    <img src="logo.png" alt="KidSkip logo"/>
   </div>
 </section>
 
@@ -463,8 +439,8 @@
   </div>
 </section>
 
-<!-- VIDEO -->
-<section class="screenshot-section">
+<!-- VIDEO DEMO -->
+<section class="screenshot-section" id="demo">
   <p class="section-label" style="margin-top:0">Demo</p>
   <h2 class="section-title">See KidSkip in action</h2>
   <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 16px 60px rgba(26,111,255,0.18);">
@@ -483,7 +459,6 @@
 <section class="screenshot-section">
   <p class="section-label" style="margin-top:0">In action</p>
   <h2 class="section-title">Simple. Clean. Effective.</h2>
-  <!-- Replace this div with: <img src="YOUR_IMGUR_URL" alt="KidSkip dashboard"/> -->
   <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
     <img src="https://i.imgur.com/wgrEnHG.png" alt="KidSkip PIN protection" style="width:48%;max-width:380px;border-radius:16px;box-shadow:0 16px 60px rgba(26,111,255,0.18);border:1px solid #e0ecff;"/>
     <img src="https://i.imgur.com/alypuI9.png" alt="KidSkip safe list" style="width:48%;max-width:380px;border-radius:16px;box-shadow:0 16px 60px rgba(26,111,255,0.18);border:1px solid #e0ecff;"/>
@@ -514,7 +489,7 @@
         <li><span class="check">✓</span> Works on all Chrome devices</li>
         <li><span class="check">✓</span> All future updates included</li>
       </ul>
-      <a href="#" class="btn-purchase">Unlock for €10 — Pay Once, Keep Forever</a>
+      <a href="https://chromewebstore.google.com/detail/kidskip/pogeigmejeccdgfnddgpfijaielmadin" class="btn-purchase">Unlock for €10 — Pay Once, Keep Forever</a>
     </div>
   </div>
 </section>
@@ -522,9 +497,10 @@
 <!-- FOOTER -->
 <footer>
   <p style="margin-bottom:10px">
-    <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="mailto:boris.huruguen@gmail.com">Contact</a> &nbsp;·&nbsp;
-    <a href="#">Add to Chrome</a>
+    <a href="terms.html">Terms &amp; Conditions</a> &nbsp;·&nbsp;
+    <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="mailto:contact.edukia@gmail.com">Contact</a> &nbsp;·&nbsp;
+    <a href="https://chromewebstore.google.com/detail/kidskip/pogeigmejeccdgfnddgpfijaielmadin">Add to Chrome</a>
   </p>
   <p>© 2026 KidSkip · Made with ❤️ for parents everywhere</p>
 </footer>
